@@ -1,0 +1,19 @@
+version: "3.4"
+
+services:
+  restaurant:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: rutvijdocker/mellow-app
+    environment:
+      - CONNECTIONSTRING=mongodb://mongo:27017/db
+    ports:
+      - 3000:3000
+    links:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    volumes:
+      - ./db-data:/data/db
